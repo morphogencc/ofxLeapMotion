@@ -10,6 +10,9 @@
     <ClCompile Include="..\src\LeapListener.cpp">
       <Filter>ofxLeapMotion\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ofxHand.cpp">
+      <Filter>ofxLeapMotion\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -33,6 +36,9 @@
       <Filter>ofxLeapMotion\src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\LeapUtils.h">
+      <Filter>ofxLeapMotion\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ofxHand.h">
       <Filter>ofxLeapMotion\src</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,10 +1,12 @@
 #pragma once
+
 #include "Leap.h"
 
 namespace ofxLeapMotion {
-	static const std::string sFingerNames[] = { "Thumb", "Index", "Middle", "Ring", "Pinky" };
-	static const std::string sBoneNames[] = { "Metacarpal", "Proximal", "Middle", "Distal" };
-	static const std::string sStateNames[] = { "STATE_INVALID", "STATE_START", "STATE_UPDATE", "STATE_END" };
+	/*
+	const std::string sFingerNames[] = { "Thumb", "Index", "Middle", "Ring", "Pinky" };
+	const std::string sBoneNames[] = { "Metacarpal", "Proximal", "Middle", "Distal" };
+	const std::string sStateNames[] = { "STATE_INVALID", "STATE_START", "STATE_UPDATE", "STATE_END" };
 
 	const std::string getFingerName(Leap::Finger::Type fingerType) {
 		return sFingerNames[fingerType];
@@ -13,6 +15,7 @@ namespace ofxLeapMotion {
 	const std::string getBoneName(Leap::Bone::Type boneType) {
 		return sBoneNames[boneType];
 	}
+	*/
 
 	const Leap::Hand getRightHand(const Leap::Frame frame) {
 		/*
@@ -52,10 +55,11 @@ namespace ofxLeapMotion {
 		Leap::FingerList fingers = hand.fingers();
 		for (Leap::FingerList::const_iterator iter = fingers.begin(); iter != fingers.end(); ++iter) {
 			Leap::Finger f = *iter;
-			if (f.type == type) {
+			if (f.type() == type) {
 				finger = f;
 			}
 		}
+		return finger;
 	}
 
 	const Leap::Bone getBone(const Leap::Finger finger, Leap::Bone::Type type) {
@@ -67,4 +71,11 @@ namespace ofxLeapMotion {
 		return bone;
 	}
 
+	/*
+	const Leap::Vector LeapToWorld(Leap::Vector leapPosition, Leap::Matrix transformationMatrix) {
+	}
+
+	const Leap::Vector WorldToLeap(Leap::Vector worldPosition, Leap::Matrix transformationMatrix) {
+	}
+	*/
 }

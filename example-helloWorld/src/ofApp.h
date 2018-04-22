@@ -3,8 +3,7 @@
 #include "ofMain.h"
 #include "ofxLeapMotion.h"
 
-class ofApp : public ofBaseApp{
-
+class ofApp : public ofBaseApp {
 	public:
 		void setup();
 		void update();
@@ -26,4 +25,5 @@ class ofApp : public ofBaseApp{
 		Leap::Hand mRightHand;
 		Leap::FingerList mRightFingers;
 		Leap::Finger mRingFinger;
+		//ofxLeapMotion::ofxHand mHand;
 };

@@ -12,12 +12,13 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
 	Leap::Frame currentFrame = mLeap->getFrame();
-
+	mRightHand = ofxLeapMotion::getRightHand(currentFrame);
+	//mHand = ofxLeapMotion::ofxHand(mRightHand);
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
+	//mHand.draw();
 }
 
 //--------------------------------------------------------------
