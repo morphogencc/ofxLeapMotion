@@ -25,5 +25,5 @@ class ofApp : public ofBaseApp {
 		Leap::Hand mRightHand;
 		Leap::FingerList mRightFingers;
 		Leap::Finger mRingFinger;
-		//ofxLeapMotion::ofxHand mHand;
+		ofxLeapMotion::ofxHand mHand;
 };

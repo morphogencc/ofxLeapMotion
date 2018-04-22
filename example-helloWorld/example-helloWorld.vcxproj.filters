@@ -13,6 +13,9 @@
     <ClCompile Include="..\src\ofxHand.cpp">
       <Filter>ofxLeapMotion\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\LeapUtils.cpp">
+      <Filter>ofxLeapMotion\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
