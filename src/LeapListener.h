@@ -1,6 +1,7 @@
 #include <memory>
 #include <string>
 #include <mutex>
+#include <chrono>
 #include "Leap.h"
 
 namespace ofxLeapMotion {
@@ -31,5 +32,9 @@ namespace ofxLeapMotion {
     protected:
       std::shared_ptr<Leap::Controller> mController;
 	  std::mutex mFrameMutex;
+	  Leap::Hand mRightHand;
+	  Leap::FingerList mRightFingers;
+	  Leap::FingerList mRingFinger;
+	  std::chrono::system_clock::time_point mStartTime;
   };
 }

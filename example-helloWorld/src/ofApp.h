@@ -23,4 +23,7 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 		std::shared_ptr<ofxLeapMotion::LeapListener> mLeap;
+		Leap::Hand mRightHand;
+		Leap::FingerList mRightFingers;
+		Leap::Finger mRingFinger;
 };
