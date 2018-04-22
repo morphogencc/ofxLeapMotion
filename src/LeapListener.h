@@ -2,6 +2,7 @@
 #include <string>
 #include <mutex>
 #include <chrono>
+#include <atomic>
 #include "Leap.h"
 
 namespace ofxLeapMotion {
@@ -30,5 +31,6 @@ namespace ofxLeapMotion {
       std::shared_ptr<Leap::Controller> mController;
 	  std::mutex mFrameMutex;
 	  Leap::Frame mFrame;
+	  std::atomic<bool> mIsFrameNew;
   };
 }

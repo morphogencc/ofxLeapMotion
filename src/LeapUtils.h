@@ -2,16 +2,16 @@
 #include "Leap.h"
 
 namespace ofxLeapMotion {
-	static const std::string fingerNames[] = { "Thumb", "Index", "Middle", "Ring", "Pinky" };
-	static const std::string boneNames[] = { "Metacarpal", "Proximal", "Middle", "Distal" };
-	static const std::string stateNames[] = { "STATE_INVALID", "STATE_START", "STATE_UPDATE", "STATE_END" };
+	static const std::string sFingerNames[] = { "Thumb", "Index", "Middle", "Ring", "Pinky" };
+	static const std::string sBoneNames[] = { "Metacarpal", "Proximal", "Middle", "Distal" };
+	static const std::string sStateNames[] = { "STATE_INVALID", "STATE_START", "STATE_UPDATE", "STATE_END" };
 
 	const std::string getFingerName(Leap::Finger::Type fingerType) {
-		return fingerNames[fingerType];
+		return sFingerNames[fingerType];
 	}
 
 	const std::string getBoneName(Leap::Bone::Type boneType) {
-		return boneNames[boneType];
+		return sBoneNames[boneType];
 	}
 
 	const Leap::Hand getRightHand(const Leap::Frame frame) {

@@ -4,6 +4,7 @@ using namespace ofxLeapMotion;
 
 LeapListener::LeapListener() {
   mController = std::make_shared<Leap::Controller>();
+  mIsFrameNew = false;
 }
 
 LeapListener::~LeapListener() {
@@ -18,6 +19,8 @@ void LeapListener::close() {
 }
 
 const Leap::Frame LeapListener::getFrame() {
+	std::lock_guard<std::mutex> lockGuard(mFrameMutex);
+	mIsFrameNew = false;
 	return mFrame;
 }
 
@@ -58,6 +61,7 @@ void LeapListener::onFocusLost(const const Leap::Controller &controller) {
 void LeapListener::onFrame(const Leap::Controller &controller) {
 	mFrameMutex.lock();
 	mFrame = mController->frame();
+	mIsFrameNew = true;
 	mFrameMutex.unlock();
 }
 
