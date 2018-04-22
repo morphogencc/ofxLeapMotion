@@ -2,12 +2,17 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-  mLeap = std::make_shared<ofxLeapMotion::LeapListener>();
-  mLeap->open();
+	ofSetFrameRate(60);
+	ofSetVerticalSync(true);
+
+	mLeap = std::make_shared<ofxLeapMotion::LeapListener>();
+	mLeap->open();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+	Leap::Frame currentFrame = mLeap->getFrame();
+
 }
 
 //--------------------------------------------------------------

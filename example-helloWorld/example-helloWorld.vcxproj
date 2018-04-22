@@ -179,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\LeapListener.h" />
+    <ClInclude Include="..\src\LeapUtils.h" />
     <ClInclude Include="..\src\ofxLeapMotion.h" />
     <ClInclude Include="src\ofApp.h" />
   </ItemGroup>

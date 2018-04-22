@@ -32,6 +32,9 @@
     <ClInclude Include="..\src\ofxLeapMotion.h">
       <Filter>ofxLeapMotion\src</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\LeapUtils.h">
+      <Filter>ofxLeapMotion\src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
