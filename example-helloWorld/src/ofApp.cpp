@@ -10,13 +10,20 @@ void ofApp::setup(){
 	mCamera.setOrientation(ofPoint(-20, 0, 0));
 	mLeap = std::make_shared<ofxLeapMotion::LeapListener>();
 	mLeap->open();
+	mHand = ofxLeapMotion::ofxHand();
+	mHand.setMappingX(-230, 230, -ofGetWidth() / 2, ofGetWidth() / 2);
+	mHand.setMappingY(90, 490, -ofGetHeight() / 2, ofGetHeight() / 2);
+	mHand.setMappingZ(-150, 150, -200, 200);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 	Leap::Frame currentFrame = mLeap->getFrame();
 	mRightHand = ofxLeapMotion::getRightHand(currentFrame);
-	mHand = ofxLeapMotion::ofxHand(mRightHand);
+	if (mRightHand.isValid()) {
+		std::printf("Found a valid right hand.\n");
+		mHand.setHand(mRightHand);
+	}
 }
 
 //--------------------------------------------------------------
@@ -33,7 +40,9 @@ void ofApp::draw(){
 	ofDrawGridPlane(800, 20, false);
 	ofPopMatrix();
 
-	mHand.draw();
+	if (mRightHand.isValid()) {
+		mHand.draw();
+	}
 
 	mCamera.end();
 }
