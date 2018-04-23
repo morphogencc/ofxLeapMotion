@@ -15,6 +15,7 @@ namespace ofxLeapMotion {
       void open();
       void close();
 	  const Leap::Frame getFrame();
+	  const bool isConnected();
       virtual void onConnect(const Leap::Controller &controller);
       virtual void onDeviceChange(const Leap::Controller &controller);
       virtual void onDeviceFailure(const Leap::Controller &controller);
@@ -34,5 +35,6 @@ namespace ofxLeapMotion {
 	  std::mutex mFrameMutex;
 	  Leap::Frame mFrame;
 	  std::atomic<bool> mIsFrameNew;
+	  bool mIsConnected;
   };
 }

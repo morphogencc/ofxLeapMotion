@@ -4,7 +4,10 @@
 void ofApp::setup(){
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_NORMALIZE);
 
+	mCamera.setOrientation(ofPoint(-20, 0, 0));
 	mLeap = std::make_shared<ofxLeapMotion::LeapListener>();
 	mLeap->open();
 }
@@ -18,7 +21,21 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+	ofBackgroundGradient(ofColor(90, 90, 90), ofColor(30, 30, 30), OF_GRADIENT_BAR);
+	ofSetColor(200);
+	ofDrawBitmapString("ofxLeapMotion - Example App\nLeap Connected? " + ofToString(mLeap->isConnected()), 20, 20);
+
+	mCamera.begin();
+
+	ofPushMatrix();
+	ofRotate(90, 0, 0, 1);
+	ofSetColor(20);
+	ofDrawGridPlane(800, 20, false);
+	ofPopMatrix();
+
 	mHand.draw();
+
+	mCamera.end();
 }
 
 //--------------------------------------------------------------
