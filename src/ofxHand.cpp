@@ -33,10 +33,10 @@ void ofxHand::setHand(Leap::Hand hand) {
 		finger.mPosition = convertToMappedPoint(leapFinger.tipPosition());
 		finger.mVelocity = convertToMappedPoint(leapFinger.tipVelocity());
 
-		finger.mJoints->push_back(convertToMappedPoint(leapFinger.jointPosition(leapFinger.JOINT_DIP)));
-		finger.mJoints->push_back(convertToMappedPoint(leapFinger.jointPosition(leapFinger.JOINT_MCP)));
-		finger.mJoints->push_back(convertToMappedPoint(leapFinger.jointPosition(leapFinger.JOINT_PIP)));
-		finger.mJoints->push_back(convertToMappedPoint(leapFinger.jointPosition(leapFinger.JOINT_TIP)));
+		finger.mJoints.push_back(convertToMappedPoint(leapFinger.jointPosition(leapFinger.JOINT_DIP)));
+		finger.mJoints.push_back(convertToMappedPoint(leapFinger.jointPosition(leapFinger.JOINT_MCP)));
+		finger.mJoints.push_back(convertToMappedPoint(leapFinger.jointPosition(leapFinger.JOINT_PIP)));
+		finger.mJoints.push_back(convertToMappedPoint(leapFinger.jointPosition(leapFinger.JOINT_TIP)));
 
 		mFingers.insert(std::pair<ofxLeapMotion::FINGER_TYPE, ofxFinger>(FINGER_TYPE(j), finger));
 	}
@@ -53,16 +53,24 @@ void ofxHand::draw() {
 	ofTranslate(mHandPosition);
 
 	//rotate the hand by the downwards normal
-	ofQuaternion q;
-	q.makeRotate(ofPoint(0, -1, 0), mHandNormal);
-	ofMatrix4x4 m;
-	q.get(m);
-	glMultMatrixf(m.getPtr());
+	//ofQuaternion q;
+	//q.makeRotate(ofPoint(0, -1, 0), mHandNormal);
+	//ofMatrix4x4 m;
+	//q.get(m);
+	//glMultMatrixf(m.getPtr());
 
 	//scale it to make it not a box
-	ofDrawBox(mHandPosition.x, mHandPosition.y, mHandPosition.z, 60);
+	ofDrawBox(mHandPosition, 60);
 
 	ofSetColor(0, 0, 0);
+	for (int i = 0; i < 5; i++) {
+		ofxLeapMotion::ofxFinger finger = mFingers[FINGER_TYPE(i)];
+		for (int j = 0; j < 3; j++) {
+			ofDrawArrow(finger.mJoints[j], finger.mJoints[j + 1], 10);
+		}
+	}
+
+	/*
 	ofDrawArrow(mHandPosition, mFingers[THUMB].mPosition, 10);
 	ofDrawArrow(mHandPosition, mFingers[INDEX].mPosition, 10);
 	ofDrawArrow(mHandPosition, mFingers[MIDDLE].mPosition, 10);
@@ -75,6 +83,7 @@ void ofxHand::draw() {
 	ofDrawArrow(mFingers[MIDDLE].mPosition + mFingers[MIDDLE].mVelocity / 20, mFingers[MIDDLE].mPosition + mFingers[MIDDLE].mVelocity / 10, 10);
 	ofDrawArrow(mFingers[RING].mPosition + mFingers[RING].mVelocity / 20, mFingers[RING].mPosition + mFingers[RING].mVelocity / 10, 10);
 	ofDrawArrow(mFingers[PINKY].mPosition + mFingers[PINKY].mVelocity / 20, mFingers[PINKY].mPosition + mFingers[PINKY].mVelocity / 10, 10);
+	*/
 
 	ofPopMatrix();
 	ofDisableLighting();

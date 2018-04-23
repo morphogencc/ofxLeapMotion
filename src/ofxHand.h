@@ -26,7 +26,7 @@ namespace ofxLeapMotion {
 	struct ofxFinger {
 		ofPoint mPosition;
 		ofPoint mVelocity;
-		std::vector<ofPoint> mJoints[4];
+		std::vector<ofPoint> mJoints;
 	};
 
 	class ofxHand {

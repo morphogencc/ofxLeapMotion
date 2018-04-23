@@ -12,7 +12,7 @@ void ofApp::setup(){
 	mLeap->open();
 	mHand = ofxLeapMotion::ofxHand();
 	mHand.setMappingX(-230, 230, -ofGetWidth() / 2, ofGetWidth() / 2);
-	mHand.setMappingY(90, 490, -ofGetHeight() / 2, ofGetHeight() / 2);
+	mHand.setMappingY(90, 490, 0, ofGetHeight() / 2);
 	mHand.setMappingZ(-150, 150, -200, 200);
 }
 
