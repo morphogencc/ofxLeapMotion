@@ -3,6 +3,7 @@ Wrapper for the Leap Motion v2.3.1 SDK.
 
 ## Requirements
 * [Leap Motion SDK v2.3.1](https://developer.leapmotion.com/sdk/v2/)
+* jsoncpp (for loading configuration files)
 
 If your computer is having trouble detecting the Leap Motion after you've installed the SDK, you may need to install the drivers located at `C:\Program Files (x86)\Leap Motion\Core Services\Drivers`.
 

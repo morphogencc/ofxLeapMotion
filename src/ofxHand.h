@@ -2,6 +2,7 @@
 
 #include <map>
 #include "Leap.h"
+#include "LeapUtils.h"
 #include "ofMain.h"
 
 /*
@@ -36,9 +37,7 @@ namespace ofxLeapMotion {
 		~ofxHand();
 		void setHand(Leap::Hand hand);
 		void draw();
-		void setMappingX(float minX, float maxX, float outputMinX, float outputMaxX);
-		void setMappingY(float minY, float maxY, float outputMinY, float outputMaxY);
-		void setMappingZ(float minZ, float maxZ, float outputMinZ, float outputMaxZ);
+		const ofPoint getPosition();
 	protected:
 		void init();
 		ofPoint convertToPoint(Leap::Vector vector);

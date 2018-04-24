@@ -1,3 +1,4 @@
+#include <fstream>
 #include "LeapListener.h"
 
 using namespace ofxLeapMotion;
@@ -6,6 +7,8 @@ LeapListener::LeapListener() {
 	mController = std::make_shared<Leap::Controller>();
 	mIsFrameNew = false;
 	mIsConnected = false;
+	mLeapOrigin = Leap::Vector(0, 0, 0);
+	mLeapRotation = Leap::Vector(0, 0, 0);
 }
 
 LeapListener::~LeapListener() {
@@ -27,6 +30,30 @@ const Leap::Frame LeapListener::getFrame() {
 
 const bool LeapListener::isConnected() {
 	return mIsConnected;
+}
+
+void LeapListener::loadConfiguration(std::string filename) {
+	Json::Value fileRoot;
+	Json::Reader reader;
+	std::ifstream jsonFile(filename.c_str());
+
+	if (!reader.parse(jsonFile, fileRoot, false)) {
+		std::printf("ofxLeapMotion::LeapListener -- failed to load configuration file at %s!\n", filename.c_str());
+		std::printf("ofxLeapMotion::LeapListener -- Reason of Failure: %s\n", reader.getFormattedErrorMessages().c_str());
+		return;
+	}
+	Json::Value position = fileRoot["position"];
+	mLeapOrigin = Leap::Vector(position[0].asFloat(), position[1].asFloat(), position[2].asFloat());
+	Json::Value rotation = fileRoot["rotation"];
+	mLeapRotation = Leap::Vector(rotation[0].asFloat(), rotation[1].asFloat(), rotation[2].asFloat());
+}
+
+const Leap::Vector LeapListener::getLeapOrigin() {
+	return mLeapOrigin;
+}
+
+const Leap::Vector LeapListener::getLeapRotation() {
+	return mLeapRotation;
 }
 
 void LeapListener::onConnect(const Leap::Controller &controller) {

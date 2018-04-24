@@ -45,22 +45,15 @@ void ofxHand::setHand(Leap::Hand hand) {
 void ofxHand::draw() {
 	ofPushStyle();
 
-	ofSetColor(190);
-	ofSetLineWidth(2);
-
 	ofEnableLighting();
+
 	ofPushMatrix();
+
 	ofTranslate(mHandPosition);
 
-	//rotate the hand by the downwards normal
-	//ofQuaternion q;
-	//q.makeRotate(ofPoint(0, -1, 0), mHandNormal);
-	//ofMatrix4x4 m;
-	//q.get(m);
-	//glMultMatrixf(m.getPtr());
-
-	//scale it to make it not a box
-	ofDrawBox(mHandPosition, 60);
+	ofSetColor(190);
+	ofSetLineWidth(2);
+	ofDrawBox(mHandPosition, ofxLeapMotion::toPixels(25), ofxLeapMotion::toPixels(5), ofxLeapMotion::toPixels(25));
 
 	ofSetColor(0, 0, 0);
 	for (int i = 0; i < 5; i++) {
@@ -70,43 +63,15 @@ void ofxHand::draw() {
 		}
 	}
 
-	/*
-	ofDrawArrow(mHandPosition, mFingers[THUMB].mPosition, 10);
-	ofDrawArrow(mHandPosition, mFingers[INDEX].mPosition, 10);
-	ofDrawArrow(mHandPosition, mFingers[MIDDLE].mPosition, 10);
-	ofDrawArrow(mHandPosition, mFingers[RING].mPosition, 10);
-	ofDrawArrow(mHandPosition, mFingers[PINKY].mPosition, 10);
-
-	ofSetColor(255, 255, 255);
-	ofDrawArrow(mFingers[THUMB].mPosition + mFingers[THUMB].mVelocity / 20, mFingers[THUMB].mPosition + mFingers[THUMB].mVelocity / 10, 10);
-	ofDrawArrow(mFingers[INDEX].mPosition + mFingers[INDEX].mVelocity / 20, mFingers[INDEX].mPosition + mFingers[INDEX].mVelocity / 10, 10);
-	ofDrawArrow(mFingers[MIDDLE].mPosition + mFingers[MIDDLE].mVelocity / 20, mFingers[MIDDLE].mPosition + mFingers[MIDDLE].mVelocity / 10, 10);
-	ofDrawArrow(mFingers[RING].mPosition + mFingers[RING].mVelocity / 20, mFingers[RING].mPosition + mFingers[RING].mVelocity / 10, 10);
-	ofDrawArrow(mFingers[PINKY].mPosition + mFingers[PINKY].mVelocity / 20, mFingers[PINKY].mPosition + mFingers[PINKY].mVelocity / 10, 10);
-	*/
-
 	ofPopMatrix();
+
 	ofDisableLighting();
 
 	ofPopStyle();
 }
 
-void ofxHand::setMappingX(float minX, float maxX, float outputMinX, float outputMaxX) {
-	mOffsetIn.x = minX;
-	mOffsetOut.x = outputMinX;
-	mScale.x = (outputMaxX - outputMinX) / (maxX - minX);
-}
-
-void ofxHand::setMappingY(float minY, float maxY, float outputMinY, float outputMaxY) {
-	mOffsetIn.y = minY;
-	mOffsetOut.y = outputMinY;
-	mScale.y = (outputMaxY - outputMinY) / (maxY - minY);
-}
-
-void ofxHand::setMappingZ(float minZ, float maxZ, float outputMinZ, float outputMaxZ) {
-	mOffsetIn.z = minZ;
-	mOffsetOut.z = outputMinZ;
-	mScale.z = (outputMaxZ - outputMinZ) / (maxZ - minZ);
+const ofPoint ofxHand::getPosition() {
+	return mHandPosition;
 }
 
 void ofxHand::init() {
@@ -129,9 +94,8 @@ ofPoint ofxHand::convertToPoint(Leap::Vector vector) {
 
 ofPoint ofxHand::convertToMappedPoint(Leap::Vector vector) {
 	ofPoint point = convertToPoint(vector);
-	point.x = mOffsetOut.x + (point.x - mOffsetIn.x) * mScale.x;
-	point.y = mOffsetOut.y + (point.y - mOffsetIn.y) * mScale.y;
-	point.z = mOffsetOut.z + (point.z - mOffsetIn.z) * mScale.z;
-
+	point.x = ofxLeapMotion::toPixels(point.x);
+	point.y = ofxLeapMotion::toPixels(point.y);
+	point.z = ofxLeapMotion::toPixels(point.z);
 	return point;
 }

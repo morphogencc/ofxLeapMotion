@@ -8,12 +8,10 @@ void ofApp::setup(){
 	glEnable(GL_NORMALIZE);
 
 	mCamera.setOrientation(ofPoint(-20, 0, 0));
+
 	mLeap = std::make_shared<ofxLeapMotion::LeapListener>();
 	mLeap->open();
 	mHand = ofxLeapMotion::ofxHand();
-	mHand.setMappingX(-230, 230, -ofGetWidth() / 2, ofGetWidth() / 2);
-	mHand.setMappingY(90, 490, 0, ofGetHeight() / 2);
-	mHand.setMappingZ(-150, 150, -200, 200);
 }
 
 //--------------------------------------------------------------
@@ -37,7 +35,7 @@ void ofApp::draw(){
 	ofPushMatrix();
 	ofRotate(90, 0, 0, 1);
 	ofSetColor(20);
-	ofDrawGridPlane(800, 20, false);
+	ofDrawGridPlane(1000, 20, true);
 	ofPopMatrix();
 
 	if (mRightHand.isValid()) {
