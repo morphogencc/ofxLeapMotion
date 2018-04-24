@@ -7,12 +7,12 @@
 
 /*
 * Uses only openFrameworks classes to represent a hand in a way that can be easily drawn.
-* Almost entirely lifted from Gene Kogan's ofxLeapMotion2
+* Largely lifted from Gene Kogan's ofxLeapMotion2
 * https://github.com/genekogan/ofxLeapMotion2
 *
-* The goal of this class is to allow users to extract information from the hand without using the Leap Motion SDK
+* The goal of this class is to allow users to extract information from the hand without using the Leap Motion SDK.
 *
-*
+* Pretty much everything in this class should live in pixel-space / world coordinates, NOT millimeters like the Leap Motion.
 */
 
 namespace ofxLeapMotion {
