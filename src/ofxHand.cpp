@@ -49,8 +49,6 @@ void ofxHand::draw() {
 
 	ofPushMatrix();
 
-	ofTranslate(mHandPosition);
-
 	ofSetColor(190);
 	ofSetLineWidth(2);
 	ofDrawBox(mHandPosition, ofxLeapMotion::toPixels(25), ofxLeapMotion::toPixels(5), ofxLeapMotion::toPixels(25));
