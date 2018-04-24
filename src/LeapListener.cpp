@@ -32,19 +32,27 @@ const bool LeapListener::isConnected() {
 	return mIsConnected;
 }
 
-void LeapListener::loadConfiguration(std::string filename) {
+void LeapListener::loadConfiguration(std::string filename, std::string configurationName) {
 	Json::Value fileRoot;
 	Json::Reader reader;
-	std::ifstream jsonFile(filename.c_str());
-
+	std::ifstream jsonFile(filename);
+	
+	if (!jsonFile.is_open()) {
+		std::printf("ofxLeapMotion::LeapListener::loadConfiguration -- Error while opening file.\n");
+	}
+	if (jsonFile.bad()) {
+		std::printf("ofxLeapMotion::LeapListener::loadConfiguration -- Error while reading file.\n");
+	}
 	if (!reader.parse(jsonFile, fileRoot, false)) {
-		std::printf("ofxLeapMotion::LeapListener -- failed to load configuration file at %s!\n", filename.c_str());
-		std::printf("ofxLeapMotion::LeapListener -- Reason of Failure: %s\n", reader.getFormattedErrorMessages().c_str());
+		std::printf("ofxLeapMotion::LeapListener::loadConfiguration -- failed to load configuration file at %s!\n", filename.c_str());
+		std::printf("ofxLeapMotion::LeapListener::loadConfiguration -- Reason of Failure: %s\n", reader.getFormattedErrorMessages().c_str());
 		return;
 	}
-	Json::Value position = fileRoot["position"];
+
+	std::printf("ofxLeapMotion::LeapListener::loadConfiguration -- loading %s configuration.\n", configurationName.c_str());
+	Json::Value position = fileRoot[configurationName.c_str()]["position"];
 	mLeapOrigin = Leap::Vector(position[0].asFloat(), position[1].asFloat(), position[2].asFloat());
-	Json::Value rotation = fileRoot["rotation"];
+	Json::Value rotation = fileRoot[configurationName.c_str()]["rotation"];
 	mLeapRotation = Leap::Vector(rotation[0].asFloat(), rotation[1].asFloat(), rotation[2].asFloat());
 }
 

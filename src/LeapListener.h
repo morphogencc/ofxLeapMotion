@@ -17,7 +17,7 @@ namespace ofxLeapMotion {
 		void close();
 		const Leap::Frame getFrame();
 		const bool isConnected();
-		void loadConfiguration(std::string filename);
+		void loadConfiguration(std::string filename, std::string configurationName);
 		const Leap::Vector getLeapOrigin();
 		const Leap::Vector getLeapRotation();
 		virtual void onConnect(const Leap::Controller &controller);
