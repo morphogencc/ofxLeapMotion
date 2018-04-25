@@ -26,19 +26,19 @@ void ofxHand::setHand(Leap::Hand hand) {
 	mPitch = hand.direction().pitch();
 
 	mFingers.clear();
-	for (int j = 0; j < 5; j++) {
-		const Leap::Finger &leapFinger = hand.fingers()[j];
+	for (int i = 0; i < 5; i++) {
+		const Leap::Finger &leapFinger = hand.fingers()[i];
 		ofxLeapMotion::ofxFinger finger;
 
 		finger.mPosition = convertToMappedPoint(leapFinger.tipPosition());
 		finger.mVelocity = convertToMappedPoint(leapFinger.tipVelocity());
 
-		finger.mJoints.push_back(convertToMappedPoint(leapFinger.jointPosition(leapFinger.JOINT_DIP)));
-		finger.mJoints.push_back(convertToMappedPoint(leapFinger.jointPosition(leapFinger.JOINT_MCP)));
-		finger.mJoints.push_back(convertToMappedPoint(leapFinger.jointPosition(leapFinger.JOINT_PIP)));
-		finger.mJoints.push_back(convertToMappedPoint(leapFinger.jointPosition(leapFinger.JOINT_TIP)));
+		for (int j = 0; j < 4; j++) {
+			Leap::Vector boneJoint = getBone(leapFinger, Leap::Bone::Type(j)).nextJoint();
+			finger.mJoints.push_back(convertToMappedPoint(boneJoint));
+		}
 
-		mFingers.insert(std::pair<ofxLeapMotion::FINGER_TYPE, ofxFinger>(FINGER_TYPE(j), finger));
+		mFingers.insert(std::pair<ofxLeapMotion::FINGER_TYPE, ofxFinger>(FINGER_TYPE(i), finger));
 	}
 }
 
