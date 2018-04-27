@@ -72,6 +72,17 @@ const ofPoint ofxHand::getPosition() {
 	return mHandPosition;
 }
 
+const std::vector<ofPoint> ofxHand::getFingerJoints() {
+	std::vector<ofPoint> fingerJoints;
+	for (int i = 0; i < 5; i++) {
+		ofxLeapMotion::ofxFinger finger = mFingers[FINGER_TYPE(i)];
+		for (int j = 0; j < 4; j++) {
+			fingerJoints.push_back(finger.mJoints[j]);
+		}
+	}
+	return fingerJoints;
+}
+
 void ofxHand::init() {
 	mIsLeft = false;
 	mHandPosition = ofPoint();
@@ -91,7 +102,7 @@ ofPoint ofxHand::convertToPoint(Leap::Vector vector) {
 }
 
 ofPoint ofxHand::convertToMappedPoint(Leap::Vector vector) {
-	ofPoint point = convertToPoint(vector);
+	ofPoint point = ofxHand::convertToPoint(vector);
 	point.x = ofxLeapMotion::toPixels(point.x);
 	point.y = ofxLeapMotion::toPixels(point.y);
 	point.z = ofxLeapMotion::toPixels(point.z);

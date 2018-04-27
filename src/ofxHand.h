@@ -38,11 +38,12 @@ namespace ofxLeapMotion {
 		void setHand(Leap::Hand hand);
 		void draw();
 		const ofPoint getPosition();
+		const std::vector<ofPoint> getFingerJoints();
 	protected:
 		void init();
+		std::map<ofxLeapMotion::FINGER_TYPE, ofxFinger> mFingers;
 		ofPoint convertToPoint(Leap::Vector vector);
 		ofPoint convertToMappedPoint(Leap::Vector vector);
-		std::map<ofxLeapMotion::FINGER_TYPE, ofxFinger> mFingers;
 		bool mIsLeft;
 		ofPoint mHandPosition;
 		ofPoint mHandNormal;
